@@ -203,6 +203,11 @@ cat << EOF | sudo tee /etc/systemd/system/containerd.service.d/10-compat-symlink
 ExecStartPre=/bin/ln -sf /run/containerd/containerd.sock /run/dockershim.sock
 EOF
 
+cat << EOF | sudo tee /etc/systemd/system/containerd.service.d/20-16M-stack.conf
+[Service]
+LimitSTACK=16777216
+EOF
+
 cat << EOF | sudo tee -a /etc/modules-load.d/containerd.conf
 overlay
 br_netfilter
