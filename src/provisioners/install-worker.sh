@@ -208,6 +208,11 @@ cat << EOF | sudo tee /etc/systemd/system/containerd.service.d/20-16M-stack.conf
 LimitSTACK=16777216
 EOF
 
+cat << EOF | sudo tee /etc/systemd/system/containerd.service.d/21-fd-limit.conf
+[Service]
+LimitNOFILE=1048576
+EOF
+
 cat << EOF | sudo tee -a /etc/modules-load.d/containerd.conf
 overlay
 br_netfilter
